@@ -16,19 +16,19 @@ export default function CTAFormSection() {
                 <input
                     type="text"
                     placeholder="Name"
-                    className="bg-brand-blue-light flex-1 w-full rounded-full px-5 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-brand-blue/20 transition border-none shadow-sm"
+                    className="bg-brand-blue-light flex-1 w-full rounded-[10px] px-5 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-brand-blue/20 transition border-none shadow-sm"
                 />
                 <input
                     type="email"
                     placeholder="Email"
-                    className="bg-brand-blue-light flex-1 w-full rounded-full px-5 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-brand-blue/20 transition border-none shadow-sm"
+                    className="bg-brand-blue-light flex-1 w-full rounded-[10px] px-5 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-brand-blue/20 transition border-none shadow-sm"
                 />
                 <input
                     type="text"
                     placeholder="Message"
-                    className="bg-brand-blue-light flex-1 w-full rounded-full px-5 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-brand-blue/20 transition border-none shadow-sm"
+                    className="bg-brand-blue-light flex-1 w-full rounded-[10px] px-5 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-brand-blue/20 transition border-none shadow-sm"
                 />
-                <button className="bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold text-sm px-8 py-3 rounded-full transition-colors duration-200 whitespace-nowrap shadow-lg shadow-brand-blue/25">
+                <button className="bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold text-sm px-8 py-3 rounded-[10px] transition-colors duration-200 whitespace-nowrap shadow-lg shadow-brand-blue/25">
                     Submit Now
                 </button>
             </div>

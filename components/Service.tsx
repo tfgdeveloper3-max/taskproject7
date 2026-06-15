@@ -66,7 +66,6 @@ export default function ServicesSection() {
                 {services.map((service, i) => (
                     <div key={i} className="relative pt-5">
 
-                        {/* Pin — fixed, never moves */}
                         <div className="absolute top-5 left-1/2 -translate-x-1/2 z-20 w-10 h-10">
                             <Image
                                 src="/images/pin.png"
@@ -77,7 +76,6 @@ export default function ServicesSection() {
                             />
                         </div>
 
-                        {/* Card — rotates from top-center (pin point), like hanging */}
                         <div
                             className={`
                                 ${service.rotation} hover:rotate-0

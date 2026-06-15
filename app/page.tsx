@@ -6,6 +6,9 @@ import PlatformsSection from "@/components/Platform";
 import ServicesSection from "@/components/Service";
 import CTABannerSection from "@/components/Ctabanner";
 import HowItWorksSection from "@/components/HowItWorks";
+import TestimonialsSection from "@/components/Testimonials";
+import FooterSection from "@/components/Footer";
+import PortfolioSection from "@/components/Portfolio";
 
 export default function Home() {
   return (
@@ -18,6 +21,9 @@ export default function Home() {
       <ServicesSection />
       <CTABannerSection />
       <HowItWorksSection />
+      <PortfolioSection />
+      <TestimonialsSection />
+      <FooterSection />
     </main>
   );
 }
