@@ -1,26 +1,236 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ========== Theme Configuration ========== */
+@theme {
+  --font-titillium: "Titillium Web", sans-serif;
+  --color-brand-blue: #0039C7;
+  --color-brand-blue-dark: #002da0;
+  --color-brand-blue-light: #EBF5FF;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ========== Typewriter Cursor Blink ========== */
+@keyframes blink {
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 }
 
+.typewriter-cursor {
+  animation: blink 1s step-end infinite;
+  color: var(--color-brand-blue);
+  font-weight: 600;
+}
+
+/* ========== Slide In Left ========== */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-in-left-d1 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+.animate-slide-in-left-d2 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+}
+
+/* ========== Sidebar Slide In From Far Left ========== */
+@keyframes sidebarSlideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-sidebar-slide {
+  opacity: 0;
+  animation: sidebarSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-sidebar-slide-d1 {
+  opacity: 0;
+  animation: sidebarSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+}
+
+.animate-sidebar-slide-d2 {
+  opacity: 0;
+  animation: sidebarSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+}
+
+/* ========== Continuous Bounce ========== */
+@keyframes continuousBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-bounce-continuous {
+  animation: continuousBounce 2s ease-in-out infinite;
+}
+
+.animate-bounce-continuous-d1 {
+  animation: continuousBounce 2s ease-in-out 0.2s infinite;
+}
+
+.animate-bounce-continuous-d2 {
+  animation: continuousBounce 2s ease-in-out 0.4s infinite;
+}
+
+/* ========== Sidebar Continuous Bounce ========== */
+@keyframes sidebarBounce {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+.animate-sidebar-bounce {
+  animation: sidebarBounce 2.5s ease-in-out infinite;
+}
+
+.animate-sidebar-bounce-d1 {
+  animation: sidebarBounce 2.5s ease-in-out 0.3s infinite;
+}
+
+.animate-sidebar-bounce-d2 {
+  animation: sidebarBounce 2.5s ease-in-out 0.6s infinite;
+}
+
+/* ========== Fade In Up ========== */
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-in-up-delay {
+  opacity: 0;
+  animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+/* ========== Book Float Animation ========== */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ========== Tilt Card ========== */
+.tilt-card {
+  transform: rotate(-6deg);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+}
+
+.tilt-card:hover {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 57, 199, 0.25);
+}
+
+/* ========== Section Fade In ========== */
+@keyframes sectionFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-section-fade {
+  animation: sectionFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ========== Form Focus Glow ========== */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0039C7;
+  box-shadow: 0 0 0 3px rgba(0, 57, 199, 0.15);
+}
+
+/* ========== Image Reveal ========== */
+@keyframes imageReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animate-image-reveal {
+  animation: imageReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float 4s ease-in-out 1s infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
