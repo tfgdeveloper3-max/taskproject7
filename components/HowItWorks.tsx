@@ -70,23 +70,27 @@ export default function HowItWorksSection() {
 
                         <div className="relative w-full h-[460px] lg:h-[520px]">
 
+                            {/* Blue blob */}
                             <div className="absolute left-[5%] top-[8%] w-[80%] h-[85%] z-0">
                                 <Image
                                     src="/images/How-it-works-bg.png"
                                     alt=""
-                                    width={360}
-                                    height={360}
+                                    width={700}       
+                                    height={700}
+                                    quality={100}      
                                     className="w-full h-full object-contain"
                                 />
                             </div>
 
+                            {/* Books */}
                             <div className="absolute right-[-15%] top-[5%] w-[150%] z-10 animate-float">
                                 <Image
                                     src="/images/How-it-works.png"
                                     alt="Published Books"
-                                    width={320}
-                                    height={400}
-                                    className="w-full h-auto object-contain drop-shadow-2xl"
+                                    width={900}      
+                                    height={800}
+                                    quality={100}    
+                                    className="w-full h-auto object-contain"
                                 />
                             </div>
 

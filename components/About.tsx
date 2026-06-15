@@ -12,18 +12,27 @@ export default function AboutSection() {
 
                     <div className="relative" style={{ minHeight: "480px" }}>
 
-                        <div className="absolute right-30 bottom-0 w-[62%] h-[75%] bg-[#c7d4f0] rounded-3xl z-0" />
-
-                        <div className="absolute bottom-0 left-[12%] z-10 w-[75%]">
+                        {/* Background.png replacing the old blue box */}
+                        <div className="absolute right-[13%] bottom-0 w-[72%] h-[82%] z-0">
                             <Image
-                                src="/images/About-us.png"
-                                alt="About our team"
-                                width={500}
-                                height={580}
-                                className="w-full h-auto object-contain drop-shadow-lg"
+                                src="/images/Background.png"
+                                alt=""
+                                fill
+                                quality={100}
+                                className="object-contain object-right-bottom"
                             />
                         </div>
 
+                        <Image
+                            src="/images/About-us.png"
+                            alt="About our team"
+                            fill
+                            quality={100}
+                            unoptimized
+                            className="object-contain"
+                        />
+
+                        {/* Floating card */}
                         <Link
                             href="/contact"
                             className="
@@ -56,6 +65,7 @@ export default function AboutSection() {
 
                     </div>
 
+                    {/* RIGHT — Text */}
                     <div className="flex flex-col justify-center lg:pl-2">
                         <h2 className="font-titillium font-bold text-3xl sm:text-4xl lg:text-[2.6rem] xl:text-[3rem] leading-[1.1] text-gray-900 mb-5">
                             Who We Are &amp; Why We<br />

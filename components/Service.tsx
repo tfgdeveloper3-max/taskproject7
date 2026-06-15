@@ -15,31 +15,37 @@ const services = [
         icon: <FileEdit size={22} className="text-brand-blue" />,
         title: "Book Editing",
         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Industry's standard ever since 1966,",
+        rotation: "rotate-3",
     },
     {
         icon: <ImageIcon size={22} className="text-brand-blue" />,
         title: "Book Cover Design",
         desc: "Aliquam hendrerit erat convallis nunc aliquet, eget euismod lectus consequat. Vestibulum sed neque orci.",
+        rotation: "rotate-0",
     },
     {
         icon: <LayoutTemplate size={22} className="text-brand-blue" />,
         title: "Book Formatting",
         desc: "Aliquam hendrerit erat convallis nunc aliquet, eget euismod lectus consequat. Vestibulum sed neque orci.",
+        rotation: "-rotate-3",
     },
     {
         icon: <BookOpen size={22} className="text-brand-blue" />,
         title: "Publishing Setup",
         desc: "Aliquam hendrerit erat convallis nunc aliquet, eget euismod lectus consequat. Vestibulum sed neque orci.",
+        rotation: "rotate-3",
     },
     {
         icon: <Megaphone size={22} className="text-brand-blue" />,
         title: "Book Marketing",
         desc: "Aliquam hendrerit erat convallis nunc aliquet, eget euismod lectus consequat. Vestibulum sed neque orci.",
+        rotation: "rotate-0",
     },
     {
         icon: <Monitor size={22} className="text-brand-blue" />,
         title: "Author Website Design",
         desc: "Aliquam hendrerit erat convallis nunc aliquet, eget euismod lectus consequat. Vestibulum sed neque orci.",
+        rotation: "-rotate-3",
     },
 ];
 
@@ -60,24 +66,28 @@ export default function ServicesSection() {
                 {services.map((service, i) => (
                     <div
                         key={i}
-                        className="group relative
-                                   rotate-3 hover:rotate-0
-                                   transition-transform duration-500 ease-out
-                                   cursor-pointer"
+                        /* Pin stays fixed — only the card rotates via inner wrapper */
+                        className="relative pt-5"
                     >
-                        <div className="bg-white rounded-2xl p-3 shadow-md">
+                        {/* Pin — always centered at top, never moves */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 w-10 h-10">
+                            <Image
+                                src="/images/pin.png"
+                                alt="pin"
+                                width={40}
+                                height={40}
+                                className="w-full h-full object-contain drop-shadow-md"
+                            />
+                        </div>
 
-                            <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-10 w-10 h-10">
-                                <Image
-                                    src="/images/pin.png"
-                                    alt="pin"
-                                    width={40}
-                                    height={40}
-                                    className="w-full h-full object-contain drop-shadow-md"
-                                />
-                            </div>
-
-                            <div className="bg-gray-100 rounded-xl px-5 pt-8 pb-5">
+                        {/* Card — rotates on hover, white bg goes up behind pin */}
+                        <div
+                            className={`${service.rotation} hover:rotate-0
+                                transition-transform duration-500 ease-out
+                                cursor-pointer bg-white rounded-2xl p-3 shadow-md
+                                -mt-5 pt-8`}
+                        >
+                            <div className="bg-gray-100 rounded-xl px-5 pt-6 pb-5">
                                 <div className="flex items-center gap-3 mb-3">
                                     <div className="bg-white rounded-lg p-2 shadow-sm">
                                         {service.icon}
