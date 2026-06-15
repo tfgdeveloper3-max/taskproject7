@@ -64,13 +64,10 @@ export default function ServicesSection() {
 
             <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {services.map((service, i) => (
-                    <div
-                        key={i}
-                        /* Pin stays fixed — only the card rotates via inner wrapper */
-                        className="relative pt-5"
-                    >
-                        {/* Pin — always centered at top, never moves */}
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 w-10 h-10">
+                    <div key={i} className="relative pt-5">
+
+                        {/* Pin — fixed, never moves */}
+                        <div className="absolute top-5 left-1/2 -translate-x-1/2 z-20 w-10 h-10">
                             <Image
                                 src="/images/pin.png"
                                 alt="pin"
@@ -80,14 +77,17 @@ export default function ServicesSection() {
                             />
                         </div>
 
-                        {/* Card — rotates on hover, white bg goes up behind pin */}
+                        {/* Card — rotates from top-center (pin point), like hanging */}
                         <div
-                            className={`${service.rotation} hover:rotate-0
+                            className={`
+                                ${service.rotation} hover:rotate-0
                                 transition-transform duration-500 ease-out
-                                cursor-pointer bg-white rounded-2xl p-3 shadow-md
-                                -mt-5 pt-8`}
+                                cursor-pointer
+                                bg-white rounded-2xl p-3 pt-12 shadow-md
+                            `}
+                            style={{ transformOrigin: "top center" }}
                         >
-                            <div className="bg-gray-100 rounded-xl px-5 pt-6 pb-5">
+                            <div className="bg-gray-100 rounded-xl px-5 pt-12 pb-5">
                                 <div className="flex items-center gap-3 mb-3">
                                     <div className="bg-white rounded-lg p-2 shadow-sm">
                                         {service.icon}
@@ -96,11 +96,9 @@ export default function ServicesSection() {
                                         {service.title}
                                     </h3>
                                 </div>
-
                                 <p className="text-gray-500 text-[1rem] leading-relaxed mb-5">
                                     {service.desc}
                                 </p>
-
                                 <a
                                     href="#"
                                     className="block w-full text-center bg-brand-blue hover:bg-brand-blue-dark text-white font-semibold text-sm py-2.5 rounded-lg transition-colors duration-200"
@@ -109,6 +107,7 @@ export default function ServicesSection() {
                                 </a>
                             </div>
                         </div>
+
                     </div>
                 ))}
             </div>
