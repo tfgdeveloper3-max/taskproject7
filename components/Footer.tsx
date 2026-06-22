@@ -3,6 +3,37 @@
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
+const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+};
+
+const quickLinks = [
+    { name: "Home", scrollTo: "hero" },
+    { name: "About Us", scrollTo: "about" },
+    { name: "Services", scrollTo: "services" },
+    { name: "Portfolio", scrollTo: "portfolio" },
+    { name: "Contact", scrollTo: "contact" },
+];
+
+const serviceColumns = [
+    [
+        "Book Writing", "Ghostwriting", "Children's Book Writing", "Sci-Fi Writing",
+        "Memoir Writing", "Fiction Writing", "SEO Content Writing",
+    ],
+    [
+        "Mystery Writing", "Historical Writing", "Fantasy Writing", "Non-Fiction Writing",
+        "Script Writing", "Horror Writing", "Book Proofreading",
+    ],
+    [
+        "Book Editing", "Ebook Creation", "Audiobook Narration", "Book Formatting",
+        "Children's Book Editing", "Book Publishing", "Book Cover Design",
+    ],
+    [
+        "Author Website Design", "Book Printing", "Book Marketing",
+    ],
+];
+
 export default function FooterSection() {
     return (
         <>
@@ -11,12 +42,10 @@ export default function FooterSection() {
 
                     <div>
                         <h2 className="font-titillium font-bold text-3xl sm:text-4xl text-gray-900 leading-tight mb-3">
-                            Join Over 200,000<br />
-                            Self-Published Authors
+                            Never Miss an Update
                         </h2>
-                        <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-sm">
-                            Subscribe to our weekly newsletter to receive articles on writing, author marketing, and the
-                            business of self-publishing.
+                        <p className="text-gray-500 text-[1rem] leading-relaxed mb-6 max-w-sm">
+                            Don't miss upcoming events, workshops, and exclusive announcements.
                         </p>
                         <div className="flex gap-2 max-w-sm">
                             <input
@@ -37,24 +66,21 @@ export default function FooterSection() {
                                     <div className="bg-brand-blue rounded-full p-1.5 flex-shrink-0">
                                         <Phone size={13} className="text-white" />
                                     </div>
-                                    <span>(000) 123-456-789</span>
+                                    <span>(323) 989-9924</span>
                                 </div>
-
                                 <div className="flex items-center gap-3 text-gray-600 text-sm">
                                     <div className="bg-brand-blue rounded-full p-1.5 flex-shrink-0">
                                         <Mail size={13} className="text-white" />
                                     </div>
-                                    <span>info@publishing.com</span>
+                                    <span>info@premiumbookwriter.com</span>
                                 </div>
-
                                 <div className="flex items-center gap-3 text-gray-600 text-sm">
                                     <div className="bg-brand-blue rounded-full p-1.5 flex-shrink-0">
                                         <MapPin size={13} className="text-white" />
                                     </div>
-                                    <span>Place Your Location</span>
+                                    <span>1001 Wilshire Boulevard, Los Angeles <br /> CA 90017, United States</span>
                                 </div>
                             </div>
-
                             <div>
                                 <Image
                                     src="/images/payment.png"
@@ -73,41 +99,43 @@ export default function FooterSection() {
             <footer className="bg-brand-blue text-white pt-12 pb-6 px-4">
                 <div className="max-w-6xl mx-auto">
 
-                    <p className="text-center text-white text-lg font-medium mb-8">
-                        Our Wide Variety of{" "}
-                        <span className="font-bold underline-offset-2">Services</span>{" "}
-                        Includes:
-                    </p>
+                    {/* Quick Links */}
+                    <div className="mb-8">
+                        <p className="text-white text-center font-bold text-sm uppercase tracking-widest mb-4 opacity-60">
+                            Quick Links
+                        </p>
+                        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                            {quickLinks.map((link) => (
+                                <li key={link.name}>
+                                    <button
+                                        onClick={() => scrollToSection(link.scrollTo)}
+                                        className="text-white/80 hover:text-white text-sm transition-colors duration-150"
+                                    >
+                                        {link.name}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-10">
-                        <ul className="flex flex-col gap-2">
-                            {["Book Publishing", "Amazon (KDP) Publishing", "Barnes & Noble Publishing", "Kobo Book Publishing", "Apple Book Publishing", "Memoir Writing", "Children Book Writing"].map((s, i) => (
-                                <li key={i}>
-                                    <a href="#" className="text-white/80 hover:text-white text-sm transition-colors duration-150">{s}</a>
-                                </li>
+                    <div className="border-t border-white/20 pt-8 mb-8">
+                        <p className="text-center text-white text-lg font-medium mb-8">
+                            Our Wide Variety of{" "}
+                            <span className="font-bold">Services</span>{" "}
+                            Includes:
+                        </p>
+
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                            {serviceColumns.map((col, ci) => (
+                                <ul key={ci} className="flex flex-col gap-2">
+                                    {col.map((s) => (
+                                        <li key={s}>
+                                            <span className="text-white/70 text-sm">{s}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             ))}
-                        </ul>
-                        <ul className="flex flex-col gap-2">
-                            {["Mystery Writing", "Historical Writing", "Fantasy Writing", "Sc-Fi Writing", "Non-Fiction Writing", "Narrative Writing", "Script Writing"].map((s, i) => (
-                                <li key={i}>
-                                    <a href="#" className="text-white/80 hover:text-white text-sm transition-colors duration-150">{s}</a>
-                                </li>
-                            ))}
-                        </ul>
-                        <ul className="flex flex-col gap-2">
-                            {["SEO Content Writing", "Book Editing", "Children's Book Editing", "Book Proofreading", "Book Formatting", "Book Marketing", "Audiobook Narration"].map((s, i) => (
-                                <li key={i}>
-                                    <a href="#" className="text-white/80 hover:text-white text-sm transition-colors duration-150">{s}</a>
-                                </li>
-                            ))}
-                        </ul>
-                        <ul className="flex flex-col gap-2">
-                            {["Draft2Digital Publishing", "Ghostwriting", "Fiction Writing", "Horror Writing", "Book Cover Design", "Book Printing", "Author Website Design"].map((s, i) => (
-                                <li key={i}>
-                                    <a href="#" className="text-white/80 hover:text-white text-sm transition-colors duration-150">{s}</a>
-                                </li>
-                            ))}
-                        </ul>
+                        </div>
                     </div>
 
                     <div className="border-t border-white/20 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -115,7 +143,7 @@ export default function FooterSection() {
                             <a href="/terms" className="text-white/70 hover:text-white text-sm transition-colors duration-150">Terms & Conditions</a>
                             <a href="/privacy" className="text-white/70 hover:text-white text-sm transition-colors duration-150">Privacy Policy</a>
                         </div>
-                        <p className="text-white/70 text-sm">© Copyright 2026 sample publishing</p>
+                        <p className="text-white/70 text-sm">© Copyright 2026 Premium Book Writer</p>
                     </div>
 
                 </div>

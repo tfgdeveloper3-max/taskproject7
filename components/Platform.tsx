@@ -8,8 +8,8 @@ export default function PlatformsSection() {
             <div className="max-w-6xl mx-auto">
                 <div className="bg-white rounded-3xl px-10 py-10 text-center shadow-sm">
                     <p className="text-gray-900 font-semibold text-[1.8rem] sm:text-[1.8rem] leading-snug mb-8">
-                        We Connect You With Top Digital Platforms For<br />
-                        Unparalleled Book Visibility.
+                        Get Ready to Take Your Book Across Top Digital <br />
+                        Reading Channels
                     </p>
 
                     <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-14">

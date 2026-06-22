@@ -1,118 +1,360 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import FreeQuoteModal from "./Freequotemodal";
+
+
+const servicesMenu = [
+    {
+        label: "Writing Services",
+        links: [
+            "Book Writing",
+            "Ghostwriting",
+            "Children's Book Writing",
+            "Sci-Fi Writing",
+            "Memoir Writing",
+            "Fiction Writing",
+            "SEO Content Writing",
+            "Mystery Writing",
+            "Historical Writing",
+            "Fantasy Writing",
+            "Non-Fiction Writing",
+            "Script Writing",
+            "Horror Writing",
+        ],
+    },
+    {
+        label: "Editing & Publishing",
+        links: [
+            "Book Proofreading",
+            "Book Editing",
+            "Ebook Creation",
+            "Audiobook Narration",
+            "Book Formatting",
+            "Children's Book Editing",
+            "Book Publishing",
+        ],
+    },
+    {
+        label: "Design, Printing & Marketing",
+        links: [
+            "Book Cover Design",
+            "Author Website Design",
+            "Book Printing",
+            "Book Marketing",
+        ],
+    },
+];
 
 const navLinks = [
-    { name: "Home", href: "#", hasDropdown: false },
-    { name: "Services", href: "#", hasDropdown: true },
-    { name: "Portfolio", href: "#", hasDropdown: false },
-    { name: "Pricing", href: "#", hasDropdown: false },
-    { name: "Blog", href: "#", hasDropdown: false },
-    { name: "Contact", href: "#", hasDropdown: false },
+    { name: "Home", scrollTo: "hero", hasDropdown: false },
+    { name: "About Us", scrollTo: "about", hasDropdown: false },
+    { name: "Services", scrollTo: "services", hasDropdown: false },
+    { name: "Portfolio", scrollTo: "portfolio", hasDropdown: false },
+    { name: "Contact", scrollTo: "contact", hasDropdown: false },
 ];
+
+const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+};
+
+const slugify = (str: string) =>
+    str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
 
 export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
+    const [servicesOpen, setServicesOpen] = useState(false);
+    const [activeService, setActiveService] = useState(servicesMenu[0].label);
+    const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+    const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
+
+    const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const handleServicesEnter = () => {
+        if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+        setServicesOpen(true);
+    };
+
+    const handleServicesLeave = () => {
+        servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 150);
+    };
+
+    const activeLinks = servicesMenu.find((s) => s.label === activeService)?.links ?? [];
+
+    const navTextColor = isScrolled ? "text-gray-700" : "text-gray-900";
+    const navHoverColor = "hover:text-brand-blue";
+
     return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-white/95 backdrop-blur-md shadow-sm"
-                    : "bg-transparent"
-                }`}
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16 lg:h-20">
-                    <a href="#" className="flex items-center gap-2 shrink-0">
-                        <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center">
-                            <span className="text-white font-bold text-sm">B</span>
+        <>
+            <nav
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+                    }`}
+            >
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16 lg:h-20">
+
+                        {/* Logo */}
+                        <a href="/" className="flex items-center gap-2 shrink-0">
+                            <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center">
+                                <span className="text-white font-bold text-sm">B</span>
+                            </div>
+                            <span className="text-lg font-bold text-gray-900">LOGO HERE</span>
+                        </a>
+
+                        {/* Desktop Nav */}
+                        <div className="hidden lg:flex items-center gap-7">
+                            <ul className="flex items-center gap-7">
+                                {navLinks.map((link) => {
+                                    if (link.hasDropdown) {
+                                        return (
+                                            <li
+                                                key={link.name}
+                                                className="relative"
+                                                onMouseEnter={handleServicesEnter}
+                                                onMouseLeave={handleServicesLeave}
+                                            >
+                                                <button
+                                                    onClick={() => scrollToSection(link.scrollTo)}
+                                                    className={`flex items-center gap-1 text-[15px] font-semibold transition-colors duration-200 ${navTextColor} ${navHoverColor}`}
+                                                >
+                                                    {link.name}
+                                                    <ChevronDown
+                                                        size={14}
+                                                        className={`mt-0.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
+                                                    />
+                                                </button>
+
+                                                <AnimatePresence>
+                                                    {servicesOpen && (
+                                                        <motion.div
+                                                            initial={{ opacity: 0, y: -8 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            exit={{ opacity: 0, y: -6 }}
+                                                            transition={{ duration: 0.2 }}
+                                                            onMouseEnter={handleServicesEnter}
+                                                            onMouseLeave={handleServicesLeave}
+                                                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 flex rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+                                                            style={{ width: "680px", background: "#fff" }}
+                                                        >
+                                                            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-blue" />
+                                                            <div className="w-[240px] shrink-0 pt-6 pb-4 border-r border-gray-100 bg-gray-50/50">
+                                                                {servicesMenu.map((srv) => (
+                                                                    <button
+                                                                        key={srv.label}
+                                                                        onMouseEnter={() => setActiveService(srv.label)}
+                                                                        className={`w-full flex items-center justify-between px-5 py-3 text-[13px] font-semibold transition-colors text-left ${activeService === srv.label
+                                                                                ? "bg-brand-blue/10 text-brand-blue"
+                                                                                : "text-gray-700 hover:bg-gray-100"
+                                                                            }`}
+                                                                    >
+                                                                        {srv.label}
+                                                                        <ChevronRight size={13} className="opacity-50 shrink-0" />
+                                                                    </button>
+                                                                ))}
+                                                            </div>
+                                                            <div className="flex-1 pt-6 pb-4 px-5">
+                                                                <p className="text-[10px] font-black uppercase tracking-widest text-brand-blue mb-4">
+                                                                    {activeService}
+                                                                </p>
+                                                                <AnimatePresence mode="wait">
+                                                                    <motion.ul
+                                                                        key={activeService}
+                                                                        initial={{ opacity: 0, x: -6 }}
+                                                                        animate={{ opacity: 1, x: 0 }}
+                                                                        exit={{ opacity: 0, x: -4 }}
+                                                                        transition={{ duration: 0.15 }}
+                                                                        className="grid grid-cols-2 gap-x-4"
+                                                                    >
+                                                                        {activeLinks.map((link) => (
+                                                                            <li key={link}>
+                                                                                <Link
+                                                                                    href={`/InnerServices/${slugify(link)}`}
+                                                                                    className="flex items-center gap-2 py-1.5 text-[13px] text-gray-600 hover:text-brand-blue hover:bg-brand-blue/5 rounded px-2 transition-colors group"
+                                                                                >
+                                                                                    <span className="w-1 h-1 rounded-full bg-brand-blue opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                                                                                    {link}
+                                                                                </Link>
+                                                                            </li>
+                                                                        ))}
+                                                                    </motion.ul>
+                                                                </AnimatePresence>
+                                                            </div>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </li>
+                                        );
+                                    }
+
+                                    return (
+                                        <li key={link.name}>
+                                            <button
+                                                onClick={() => scrollToSection(link.scrollTo)}
+                                                className={`flex items-center text-[15px] font-semibold transition-colors duration-200 ${navTextColor} ${navHoverColor}`}
+                                            >
+                                                {link.name}
+                                            </button>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
-                        <span className="text-lg font-bold text-gray-900">
-                            Logo HERE
-                        </span>
-                    </a>
 
-                    <div className="hidden lg:flex items-center gap-7">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className="flex items-center gap-1 text-[15px] font-semibold text-gray-700 hover:text-brand-blue transition-colors duration-200"
-                            >
-                                {link.name}
-                                {link.hasDropdown && <ChevronDown size={14} className="mt-0.5" />}
-                            </a>
-                        ))}
-                    </div>
-
-                    <div className="hidden lg:flex items-center gap-5">
-                        <a
-                            href="tel:+11234567890"
-                            className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors"
-                        >
-                            <Phone size={16} />
-                            <span>+1 (123) 456-7890</span>
-                        </a>
-                        <a
-                            href="#"
-                            className="bg-brand-blue text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-blue-dark transition-colors duration-200 shadow-md shadow-brand-blue/25"
-                        >
-                            Get a Free Quote
-                        </a>
-                    </div>
-
-                    <button
-                        className="lg:hidden p-2 text-gray-700 hover:text-brand-blue transition-colors"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
-
-                <div
-                    className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? "max-h-96 pb-4" : "max-h-0"
-                        }`}
-                >
-                    <div className="pt-2 border-t border-gray-200">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className="flex items-center justify-between py-3 text-sm font-semibold text-gray-700 hover:text-brand-blue transition-colors"
-                            >
-                                {link.name}
-                                {link.hasDropdown && <ChevronDown size={14} />}
-                            </a>
-                        ))}
-                        <div className="pt-3 mt-2 border-t border-gray-200 space-y-3">
-                            <a
-                                href="tel:+11234567890"
-                                className="flex items-center gap-2 text-sm font-medium text-gray-600"
-                            >
-                                <Phone size={16} />
-                                <span>+1 (123) 456-7890</span>
-                            </a>
-                            <a
-                                href="#"
-                                className="block bg-brand-blue text-white px-6 py-2.5 rounded-lg text-sm font-semibold text-center hover:bg-brand-blue-dark transition-colors"
+                        {/* Desktop CTA */}
+                        <div className="hidden lg:flex items-center gap-5">
+                            <button
+                                onClick={() => setIsQuoteModalOpen(true)}
+                                className="bg-brand-blue text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-blue-dark transition-colors duration-200 shadow-md shadow-brand-blue/25"
                             >
                                 Get a Free Quote
-                            </a>
+                            </button>
                         </div>
+
+                        {/* Mobile menu toggle */}
+                        <button
+                            className={`lg:hidden p-2 transition-colors ${isScrolled ? "text-gray-700 hover:text-brand-blue" : "text-white hover:text-white/80"
+                                }`}
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
                     </div>
                 </div>
-            </div>
-        </nav>
+
+                {/* Mobile Menu */}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="lg:hidden overflow-hidden bg-white border-t border-gray-100 shadow-lg"
+                        >
+                            <div className="px-4 py-4 flex flex-col gap-1 items-center">
+                                {navLinks.map((link) => {
+                                    if (link.hasDropdown) {
+                                        return (
+                                            <div key={link.name} className="border-b border-gray-100">
+                                                <div className="flex items-center justify-between">
+                                                    <button
+                                                        onClick={() => { scrollToSection(link.scrollTo); setIsMobileMenuOpen(false); }}
+                                                        className="flex-1 py-3 text-sm font-semibold text-gray-700 hover:text-brand-blue text-center"
+                                                    >
+                                                        {link.name}
+                                                    </button>
+                                                    <button
+                                                        className="p-3 text-gray-500 hover:text-brand-blue"
+                                                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                                                    >
+                                                        <ChevronDown
+                                                            size={16}
+                                                            className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                                                        />
+                                                    </button>
+                                                </div>
+                                                <AnimatePresence>
+                                                    {mobileServicesOpen && (
+                                                        <motion.ul
+                                                            initial={{ opacity: 0, height: 0 }}
+                                                            animate={{ opacity: 1, height: "auto" }}
+                                                            exit={{ opacity: 0, height: 0 }}
+                                                            className="pl-2 overflow-hidden"
+                                                        >
+                                                            {servicesMenu.map((srv) => (
+                                                                <li key={srv.label}>
+                                                                    <button
+                                                                        className="w-full text-left px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:text-brand-blue flex items-center justify-between transition-colors"
+                                                                        onClick={() =>
+                                                                            setMobileSubOpen(
+                                                                                mobileSubOpen === srv.label ? null : srv.label
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        {srv.label}
+                                                                        <ChevronDown
+                                                                            size={12}
+                                                                            className={`transition-transform ${mobileSubOpen === srv.label ? "rotate-180" : ""
+                                                                                } text-gray-400`}
+                                                                        />
+                                                                    </button>
+                                                                    <AnimatePresence>
+                                                                        {mobileSubOpen === srv.label && (
+                                                                            <motion.ul
+                                                                                initial={{ opacity: 0, height: 0 }}
+                                                                                animate={{ opacity: 1, height: "auto" }}
+                                                                                exit={{ opacity: 0, height: 0 }}
+                                                                                className="pl-4 overflow-hidden"
+                                                                            >
+                                                                                {srv.links.map((linkItem) => (
+                                                                                    <li key={linkItem}>
+                                                                                        <Link
+                                                                                            href={`/InnerServices/${slugify(linkItem)}`}
+                                                                                            className="block px-3 py-2 text-[12px] text-gray-500 hover:text-brand-blue transition-colors"
+                                                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                                                        >
+                                                                                            {linkItem}
+                                                                                        </Link>
+                                                                                    </li>
+                                                                                ))}
+                                                                            </motion.ul>
+                                                                        )}
+                                                                    </AnimatePresence>
+                                                                </li>
+                                                            ))}
+                                                        </motion.ul>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
+                                        );
+                                    }
+
+                                    return (
+                                        <button
+                                            key={link.name}
+                                            onClick={() => { scrollToSection(link.scrollTo); setIsMobileMenuOpen(false); }}
+                                            className="flex items-center justify-center w-full py-3 text-sm font-semibold text-gray-700 hover:text-brand-blue border-b border-gray-100 transition-colors text-center"
+                                        >
+                                            {link.name}
+                                        </button>
+                                    );
+                                })}
+
+                                <div className="pt-4 mt-2">
+                                    <button
+                                        onClick={() => {
+                                            setIsMobileMenuOpen(false);
+                                            setIsQuoteModalOpen(true);
+                                        }}
+                                        className="w-full bg-brand-blue text-white px-6 py-2.5 rounded-lg text-sm font-semibold text-center hover:bg-brand-blue-dark transition-colors"
+                                    >
+                                        Get a Free Quote
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </nav>
+
+            <FreeQuoteModal
+                isOpen={isQuoteModalOpen}
+                onClose={() => setIsQuoteModalOpen(false)}
+            />
+        </>
     );
 }

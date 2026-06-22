@@ -1,8 +1,36 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
+import FreeQuoteModal from "./Freequotemodal";
+
+function openLiveChat() {
+    if (typeof window === "undefined") return;
+
+    if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("maximize");
+        return;
+    }
+
+    const lc = (window as any).LC_API;
+    if (lc && typeof lc.open_chat_window === "function") {
+        lc.open_chat_window();
+        return;
+    }
+
+    const selectors = [
+        "#chat-widget-container button",
+        "[id^='chat-widget']",
+        "iframe[title*='chat' i]",
+    ];
+    for (const sel of selectors) {
+        const el = document.querySelector<HTMLElement>(sel);
+        if (el) { el.click(); return; }
+    }
+}
 
 export default function CTABannerSection() {
+    const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
     return (
         <div className="relative" style={{ paddingTop: "80px" }}>
             <section
@@ -40,33 +68,37 @@ export default function CTABannerSection() {
                         </div>
 
                         <div className="flex flex-col justify-center py-10 lg:py-14 lg:pl-4">
-                            <h2 className="font-titillium font-bold text-3xl sm:text-4xl lg:text-[2.8rem] xl:text-[3.2rem] leading-[1.1] text-white mb-4">
-                                Let's Create Something<br />
-                                Great Together
+                            <h2 className="font-titillium font-bold text-[1.8rem] sm:text-[1.8rem] lg:text-[2.3rem] xl:text-[2.8rem] leading-[1.1] text-white mb-4">
+                                Every Day You Wait Is Another Day Your
+                                Readers Haven't Found You.
                             </h2>
-                            <p className="text-white/85 text-sm leading-relaxed mb-7 max-w-md">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                                industry's standard dummy text ever since 1966, when designers.
+                            <p className="text-white/85 text-[1rem] leading-relaxed mb-7 max-w-md">
+                                Your story has the power to inspire, educate, and connect, but only if it's seen. Let our publishing experts transform your manuscript into a professionally published book that's built to reach the audience it deserves.
                             </p>
                             <div className="flex flex-wrap gap-4">
-                                <a
-                                    href="#"
+                                <button
+                                    onClick={openLiveChat}
                                     className="inline-flex items-center bg-white text-gray-900 font-semibold text-sm px-8 py-3.5 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                                 >
-                                    Get Started
-                                </a>
-                                <a
-                                    href="#"
+                                    Live Chat
+                                </button>
+                                <button
+                                    onClick={() => setIsQuoteModalOpen(true)}
                                     className="inline-flex items-center border-2 border-white text-white font-semibold text-sm px-8 py-3.5 rounded-lg hover:bg-white/10 transition-colors duration-200"
                                 >
-                                    Get a Free Quote
-                                </a>
+                                    Get Your Free Publishing Plan
+                                </button>
                             </div>
                         </div>
 
                     </div>
                 </div>
             </section>
+
+            <FreeQuoteModal
+                isOpen={isQuoteModalOpen}
+                onClose={() => setIsQuoteModalOpen(false)}
+            />
         </div>
     );
 }

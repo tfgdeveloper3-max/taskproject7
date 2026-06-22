@@ -9,6 +9,7 @@ import HowItWorksSection from "@/components/HowItWorks";
 import TestimonialsSection from "@/components/Testimonials";
 import FooterSection from "@/components/Footer";
 import PortfolioSection from "@/components/Portfolio";
+import ContactPage from "@/components/Contact";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <HowItWorksSection />
       <PortfolioSection />
       <TestimonialsSection />
+      <ContactPage />
       <FooterSection />
     </main>
   );

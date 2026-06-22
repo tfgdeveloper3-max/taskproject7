@@ -3,6 +3,32 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Phone, Mail } from "lucide-react";
+import FreeQuoteModal from "./Freequotemodal";
+
+function openLiveChat() {
+    if (typeof window === "undefined") return;
+
+    if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("maximize");
+        return;
+    }
+
+    const lc = (window as any).LC_API;
+    if (lc && typeof lc.open_chat_window === "function") {
+        lc.open_chat_window();
+        return;
+    }
+
+    const selectors = [
+        "#chat-widget-container button",
+        "[id^='chat-widget']",
+        "iframe[title*='chat' i]",
+    ];
+    for (const sel of selectors) {
+        const el = document.querySelector<HTMLElement>(sel);
+        if (el) { el.click(); return; }
+    }
+}
 
 function useTypewriter(
     text: string,
@@ -52,10 +78,11 @@ function useTypewriter(
 }
 
 export default function Hero() {
-    const typedText = useTypewriter("Writing Services", 75, 35, 2500);
+    const typedText = useTypewriter("Bestselling Books", 75, 35, 2500);
 
     const [ctaBounce, setCtaBounce] = useState(false);
     const [sidebarBounce, setSidebarBounce] = useState(false);
+    const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
     useEffect(() => {
         const t1 = setTimeout(() => setCtaBounce(true), 1800);
@@ -67,7 +94,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section className="relative min-h-screen bg-brand-blue-light overflow-hidden">
+        <section id="hero" className="relative min-h-screen bg-brand-blue-light overflow-hidden">
             <div className="absolute inset-0">
                 <Image
                     src="/images/Hero-bg.png"
@@ -81,7 +108,7 @@ export default function Hero() {
 
             <div className="fixed left-0 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 animate-sidebar-slide">
                 <a
-                    href="tel:+11234567890"
+                    href="tel:3239899924"
                     className={`${sidebarBounce ? "animate-sidebar-bounce" : ""}
                         bg-brand-blue hover:bg-brand-blue-dark transition-colors duration-200
                         flex items-center justify-center w-[42px] h-[42px] rounded-r-xl shadow-lg`}
@@ -91,7 +118,7 @@ export default function Hero() {
                 </a>
 
                 <a
-                    href="mailto:info@brandpublishers.com"
+                    href="mailto:info@premiumbookwriter.com"
                     className={`${sidebarBounce ? "animate-sidebar-bounce-d1" : ""}
                         bg-brand-blue hover:bg-brand-blue-dark transition-colors duration-200
                         flex items-center justify-center w-[42px] h-[42px] rounded-r-xl shadow-lg`}
@@ -104,13 +131,13 @@ export default function Hero() {
                     className={`${sidebarBounce ? "animate-sidebar-bounce-d2" : ""}
                         bg-brand-blue px-2 py-4 flex items-center justify-center rounded-r-xl shadow-lg`}
                 >
-                    <a
-                        href="#"
+                    <button
+                        onClick={() => setIsQuoteModalOpen(true)}
                         className="text-white text-[9px] font-semibold tracking-[0.18em] uppercase whitespace-nowrap"
                         style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                     >
                         Contact Our Book Publishing Experts
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -121,14 +148,14 @@ export default function Hero() {
 
                         <div className="mb-4 inline-flex">
                             <span className="border border-gray-300 text-gray-600 text-sm font-medium px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm">
-                                Book Publishing Services Simplified For You!
+                                The Hub Where Authors Become Successful
                             </span>
                         </div>
 
                         <h1 className="font-titillium font-[400] text-[2.6rem] sm:text-[3rem] md:text-[3.4rem] lg:text-[3.2rem] xl:text-[3.8rem] leading-[1.08] text-gray-900 tracking-tight">
-                            Brand Publishers Bring
+                            Premium Book Writer
                             <br />
-                            You Premium Book
+                            Shapes Stories Into
                             <br />
                             <span className="text-brand-blue font-[600]">
                                 {typedText}
@@ -138,28 +165,28 @@ export default function Hero() {
 
                         <div className="mt-7 flex flex-wrap gap-3">
                             <div className="animate-slide-in-left">
-                                <a
-                                    href="#"
+                                <button
+                                    onClick={() => setIsQuoteModalOpen(true)}
                                     className={`${ctaBounce ? "animate-bounce-continuous" : ""} inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-brand-blue-dark transition-colors duration-200 shadow-lg shadow-brand-blue/25`}
                                 >
                                     Get Started
                                     <ArrowRight size={16} />
-                                </a>
+                                </button>
                             </div>
 
                             <div className="animate-slide-in-left-d1">
-                                <a
-                                    href="#"
+                                <button
+                                    onClick={openLiveChat}
                                     className={`${ctaBounce ? "animate-bounce-continuous-d1" : ""} inline-flex items-center gap-2 border-2 border-brand-blue text-brand-blue bg-transparent px-6 py-3 rounded-lg text-sm font-semibold hover:bg-brand-blue hover:text-white transition-colors duration-200`}
                                 >
-                                    Get a Free Quote
+                                    Live Chat
                                     <ArrowRight size={16} />
-                                </a>
+                                </button>
                             </div>
 
                             <div className="animate-slide-in-left-d2">
                                 <a
-                                    href="#"
+                                    href="tel:3239899924"
                                     className={`${ctaBounce ? "animate-bounce-continuous-d2" : ""} inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-brand-blue-dark transition-colors duration-200 shadow-lg shadow-brand-blue/25`}
                                 >
                                     Call Us Now
@@ -201,6 +228,11 @@ export default function Hero() {
 
                 </div>
             </div>
+
+            <FreeQuoteModal
+                isOpen={isQuoteModalOpen}
+                onClose={() => setIsQuoteModalOpen(false)}
+            />
         </section>
     );
 }

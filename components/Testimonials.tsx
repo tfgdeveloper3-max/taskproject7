@@ -45,16 +45,10 @@ export default function TestimonialsSection() {
                         ${headingVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 >
                     <h2 className="font-titillium font-bold text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.1] text-gray-900">
-                        Discover How We've Helped<br />
-                        Businesses Like Yours Achieve<br />
-                        Extraordinary Results
+                        See Why Authors Choose Us<br />
                     </h2>
-                    <p className="text-gray-500 text-sm leading-relaxed self-start lg:pt-2">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                        Ipsum has been the industry's standard dummy text ever since 1966, when
-                        designers at Letraset and James Mosley, the librarian at St Bride Printing Library, took
-                        a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body
-                        Type sheets. It has survived not only many decades
+                    <p className="text-gray-500 text-[1rem] leading-relaxed self-start lg:pt-2">
+                        Authors choose us because we make publishing simple, supportive, and results-driven. We focus on understanding your story, refining your manuscript, and delivering a finished book that reflects your voice and connects with readers. See genuine feedback from authors yourself.
                     </p>
                 </div>
 
@@ -73,11 +67,10 @@ export default function TestimonialsSection() {
                             </div>
                             <div className="flex items-end gap-4">
                                 <div className="flex-1">
-                                    <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley.
+                                    <p className="text-gray-500 text-[1rem] leading-relaxed mb-4">
+                                        What stood out to me was how responsive the team was throughout the process. They explained every step clearly and always made time to answer my questions. It made publishing my first book much less overwhelming.
                                     </p>
-                                    <p className="text-brand-blue font-bold text-sm">Sarah L.</p>
-                                    <p className="text-gray-400 text-xs">Marketing Director at Nova Cosmetics</p>
+                                    <p className="text-brand-blue font-bold text-sm">Amaris Ellwood</p>
                                 </div>
                                 <div className="flex-shrink-0 -mr-10 -mb-6">
                                     <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg">
@@ -99,11 +92,10 @@ export default function TestimonialsSection() {
                         >
                             <div className="flex items-end gap-4">
                                 <div className="flex-1">
-                                    <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley.
+                                    <p className="text-gray-500 text-[1rem] leading-relaxed mb-4">
+                                        I appreciated that my feedback was actually listened to. The edits improved the manuscript without changing my voice, and the final result felt like the book I had envisioned from the beginning.
                                     </p>
-                                    <p className="text-brand-blue font-bold text-sm">James T.</p>
-                                    <p className="text-gray-400 text-xs">CEO of MoveWell Fitness</p>
+                                    <p className="text-brand-blue font-bold text-sm">Leocadia Voss</p>
                                 </div>
                                 <div className="flex-shrink-0 -mr-10 -mb-6">
                                     <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg">
@@ -126,11 +118,10 @@ export default function TestimonialsSection() {
                             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-30 h-30 rounded-full overflow-hidden border-4 border-white shadow-lg">
                                 <img src="/images/Elena.png" alt="Elena K." className="w-full h-full object-cover" />
                             </div>
-                            <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley.
+                            <p className="text-gray-500 text-[1rem] leading-relaxed mb-4">
+                                The marketing guidance was practical and easy to follow. Instead of making unrealistic promises, they gave me a clear plan that helped me feel confident about launching my book.
                             </p>
-                            <p className="text-brand-blue font-bold text-sm">Elena K.</p>
-                            <p className="text-gray-400 text-xs">Co-Founder of Elara Tech</p>
+                            <p className="text-brand-blue font-bold text-sm">Thessaly Arden</p>
                         </div>
 
                         <div
@@ -139,16 +130,15 @@ export default function TestimonialsSection() {
                                 transition-all duration-700 ease-out delay-[300ms]
                                 ${card4.inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"}`}
                         >
-                            <p className="text-gray-500 text-sm leading-relaxed mb-5">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley.
+                            <p className="text-gray-500 text-[1rem] leading-relaxed mb-5">
+                                From the first consultation to the final files, the communication was consistent and professional. I always knew what stage my project was in, and the team delivered exactly what they said they would. It was a smooth experience from start to finish.
                             </p>
                             <div className="flex items-center justify-center gap-3">
                                 <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md flex-shrink-0">
                                     <img src="/images/Daniel.png" alt="Daniel R." className="w-full h-full object-cover" />
                                 </div>
                                 <div className="text-left">
-                                    <p className="text-brand-blue font-bold text-sm">Daniel R.</p>
-                                    <p className="text-gray-400 text-xs">Owner of Lume Café</p>
+                                    <p className="text-brand-blue font-bold text-sm">Seraphine Marlowe</p>
                                 </div>
                             </div>
                         </div>

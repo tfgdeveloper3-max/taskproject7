@@ -5,18 +5,18 @@ import Image from "next/image";
 const steps = [
     {
         number: "01",
-        title: "Discover & Strategize",
-        desc: "We start by listening — learning about your brand, goals, and challenges. Then we craft a custom strategy that sets the foundation for success.",
+        title: "Envision",
+        desc: "We uncover the heart of your story and create a publishing strategy tailored to your goals, audience, and long-term success.",
     },
     {
         number: "02",
-        title: "Design & Build",
-        desc: "Our creative and technical teams bring your vision to life, designing solutions that are not just beautiful but also functional and results-driven.",
+        title: "Transform",
+        desc: "Your manuscript is expertly refined through professional editing, exceptional design, and meticulous production, ready to captivate readers from the very first page.",
     },
     {
         number: "03",
-        title: "Launch & Grow",
-        desc: "Once everything's ready, we launch — but we don't stop there. We monitor, optimize, and scale your digital presence to keep you ahead.",
+        title: "Thrive",
+        desc: "We don't just publish books, we build author brands. With strategic promotion and lasting visibility, we help your story continue making an impact long after launch.",
     },
 ];
 
@@ -31,9 +31,8 @@ export default function HowItWorksSection() {
                             HOW IT WORKS
                         </p>
                         <h2 className="font-titillium font-bold text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.1] text-gray-900 mb-10">
-                            The Path To Your Publishing
-                            <br />
-                            Breakthrough
+                            Three Steps. The Path to Publishing 
+                            Excellence
                         </h2>
                         <div className="flex flex-col gap-8">
                             {steps.map((step) => (
@@ -47,7 +46,7 @@ export default function HowItWorksSection() {
                                         <h3 className="font-titillium font-bold text-gray-900 text-lg mb-1.5">
                                             {step.title}
                                         </h3>
-                                        <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+                                        <p className="text-gray-500 text-[1rem] leading-relaxed max-w-sm">
                                             {step.desc}
                                         </p>
                                     </div>

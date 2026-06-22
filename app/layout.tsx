@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Titillium_Web } from "next/font/google";
 import "./globals.css";
+import LiveChat from "@/components/LiveChat";
 
 const titillium = Titillium_Web({
   weight: ["400", "600", "700"],
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${titillium.variable} font-titillium antialiased`}>
-        {children}
+        {children} <LiveChat />
       </body>
     </html>
   );
