@@ -10,8 +10,11 @@ const titillium = Titillium_Web({
 });
 
 export const metadata: Metadata = {
-  title: "Brand Publishers — Premium Book Writing Services",
-  description: "Book Publishing Services Simplified For You!",
+  title: "Premium Book Writer",
+  description: "Book Writing Services Simplified For You!",
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({
