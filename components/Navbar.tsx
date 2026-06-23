@@ -6,7 +6,6 @@ import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import FreeQuoteModal from "./Freequotemodal";
 
-
 const servicesMenu = [
     {
         label: "Writing Services",
@@ -69,7 +68,6 @@ export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-
     const [servicesOpen, setServicesOpen] = useState(false);
     const [activeService, setActiveService] = useState(servicesMenu[0].label);
     const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -94,27 +92,24 @@ export default function Navbar() {
 
     const activeLinks = servicesMenu.find((s) => s.label === activeService)?.links ?? [];
 
-    const navTextColor = isScrolled ? "text-gray-700" : "text-gray-900";
-    const navHoverColor = "hover:text-brand-blue";
+    const navTextColor = "text-white";
+    const navHoverColor = "hover:text-blue-300";
 
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+                        ? "bg-[#0E1626]/95 backdrop-blur-md shadow-sm"
+                        : "bg-[#0E1626]"
                     }`}
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16 lg:h-20">
+                    <div className="flex items-center justify-between h-24 lg:h-28">
 
-                        {/* Logo */}
-                        <a href="/" className="flex items-center gap-2 shrink-0">
-                            <div className="w-8 h-8 bg-brand-blue rounded-md flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">B</span>
-                            </div>
-                            <span className="text-lg font-bold text-gray-900">LOGO HERE</span>
+                        <a href="/" className="flex items-center shrink-0 h-full py-2">
+                            <img src="/images/logo.png" alt="Logo" className="h-30 w-auto object-contain" />
                         </a>
 
-                        {/* Desktop Nav */}
                         <div className="hidden lg:flex items-center gap-7">
                             <ul className="flex items-center gap-7">
                                 {navLinks.map((link) => {
@@ -213,20 +208,17 @@ export default function Navbar() {
                             </ul>
                         </div>
 
-                        {/* Desktop CTA */}
-                        <div className="hidden lg:flex items-center gap-5">
+                        <div className="hidden lg:flex items-center">
                             <button
                                 onClick={() => setIsQuoteModalOpen(true)}
-                                className="bg-brand-blue text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-blue-dark transition-colors duration-200 shadow-md shadow-brand-blue/25"
+                                className="bg-[#002da0] text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#002487] shadow-md transition-colors"
                             >
                                 Get a Free Quote
                             </button>
                         </div>
 
-                        {/* Mobile menu toggle */}
                         <button
-                            className={`lg:hidden p-2 transition-colors ${isScrolled ? "text-gray-700 hover:text-brand-blue" : "text-white hover:text-white/80"
-                                }`}
+                            className="lg:hidden p-2 text-white hover:text-blue-300 transition-colors"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             aria-label="Toggle menu"
                         >
@@ -235,7 +227,6 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                {/* Mobile Menu */}
                 <AnimatePresence>
                     {isMobileMenuOpen && (
                         <motion.div
@@ -243,22 +234,22 @@ export default function Navbar() {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="lg:hidden overflow-hidden bg-white border-t border-gray-100 shadow-lg"
+                            className="lg:hidden overflow-hidden bg-[#0E1626] border-t border-white/10 shadow-lg"
                         >
                             <div className="px-4 py-4 flex flex-col gap-1 items-center">
                                 {navLinks.map((link) => {
                                     if (link.hasDropdown) {
                                         return (
-                                            <div key={link.name} className="border-b border-gray-100">
+                                            <div key={link.name} className="w-full border-b border-white/10">
                                                 <div className="flex items-center justify-between">
                                                     <button
                                                         onClick={() => { scrollToSection(link.scrollTo); setIsMobileMenuOpen(false); }}
-                                                        className="flex-1 py-3 text-sm font-semibold text-gray-700 hover:text-brand-blue text-center"
+                                                        className="flex-1 py-3 text-sm font-semibold text-white hover:text-blue-300 text-center transition-colors"
                                                     >
                                                         {link.name}
                                                     </button>
                                                     <button
-                                                        className="p-3 text-gray-500 hover:text-brand-blue"
+                                                        className="p-3 text-white/60 hover:text-blue-300"
                                                         onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                                                     >
                                                         <ChevronDown
@@ -278,7 +269,7 @@ export default function Navbar() {
                                                             {servicesMenu.map((srv) => (
                                                                 <li key={srv.label}>
                                                                     <button
-                                                                        className="w-full text-left px-3 py-2.5 text-[13px] font-semibold text-gray-700 hover:text-brand-blue flex items-center justify-between transition-colors"
+                                                                        className="w-full text-left px-3 py-2.5 text-[13px] font-semibold text-white/80 hover:text-blue-300 flex items-center justify-between transition-colors"
                                                                         onClick={() =>
                                                                             setMobileSubOpen(
                                                                                 mobileSubOpen === srv.label ? null : srv.label
@@ -289,7 +280,7 @@ export default function Navbar() {
                                                                         <ChevronDown
                                                                             size={12}
                                                                             className={`transition-transform ${mobileSubOpen === srv.label ? "rotate-180" : ""
-                                                                                } text-gray-400`}
+                                                                                } text-white/40`}
                                                                         />
                                                                     </button>
                                                                     <AnimatePresence>
@@ -304,7 +295,7 @@ export default function Navbar() {
                                                                                     <li key={linkItem}>
                                                                                         <Link
                                                                                             href={`/InnerServices/${slugify(linkItem)}`}
-                                                                                            className="block px-3 py-2 text-[12px] text-gray-500 hover:text-brand-blue transition-colors"
+                                                                                            className="block px-3 py-2 text-[12px] text-white/50 hover:text-blue-300 transition-colors"
                                                                                             onClick={() => setIsMobileMenuOpen(false)}
                                                                                         >
                                                                                             {linkItem}
@@ -327,24 +318,22 @@ export default function Navbar() {
                                         <button
                                             key={link.name}
                                             onClick={() => { scrollToSection(link.scrollTo); setIsMobileMenuOpen(false); }}
-                                            className="flex items-center justify-center w-full py-3 text-sm font-semibold text-gray-700 hover:text-brand-blue border-b border-gray-100 transition-colors text-center"
+                                            className="flex items-center justify-center w-full py-3 text-sm font-semibold text-white hover:text-blue-300 border-b border-white/10 transition-colors text-center"
                                         >
                                             {link.name}
                                         </button>
                                     );
                                 })}
 
-                                <div className="pt-4 mt-2">
-                                    <button
-                                        onClick={() => {
-                                            setIsMobileMenuOpen(false);
-                                            setIsQuoteModalOpen(true);
-                                        }}
-                                        className="w-full bg-brand-blue text-white px-6 py-2.5 rounded-lg text-sm font-semibold text-center hover:bg-brand-blue-dark transition-colors"
-                                    >
-                                        Get a Free Quote
-                                    </button>
-                                </div>
+                                <button
+                                    onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        setIsQuoteModalOpen(true);
+                                    }}
+                                    className="w-full bg-[#002da0] text-white px-6 py-2.5 rounded-lg text-sm font-semibold text-center hover:bg-[#002487] shadow-md transition-colors mt-3"
+                                >
+                                    Get a Free Quote
+                                </button>
                             </div>
                         </motion.div>
                     )}

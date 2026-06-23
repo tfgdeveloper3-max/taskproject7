@@ -157,7 +157,7 @@ export default function Hero() {
                             <br />
                             Shapes Stories Into
                             <br />
-                            <span className="text-brand-blue font-[600]">
+                            <span className="text-brand-blue-dark font-[600]">
                                 {typedText}
                                 <span className="typewriter-cursor">|</span>
                             </span>
